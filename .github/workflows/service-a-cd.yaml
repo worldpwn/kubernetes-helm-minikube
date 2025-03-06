@@ -33,6 +33,7 @@ jobs:
       - name: Publish Docker Image to Docker Hub
         run: |
           docker push worldpwn/${{ env.APP_NAME }}:${{github.run_number}}
+          
   deploy:
     runs-on: ubuntu-latest
 
