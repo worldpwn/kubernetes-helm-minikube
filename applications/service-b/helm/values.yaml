@@ -8,3 +8,6 @@ image:
 
 service:
   port: 8012
+
+config:
+  SERVICE_A_URL: "http://service-a:8011"

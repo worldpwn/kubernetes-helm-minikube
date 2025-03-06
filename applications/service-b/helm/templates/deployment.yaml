@@ -20,6 +20,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.appName }}-config
           readinessProbe:
             httpGet:
               path: /ping
