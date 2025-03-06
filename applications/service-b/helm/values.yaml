@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: worldpwn/service-b
-  tag: "1"
+  tag: "5"
   pullPolicy: IfNotPresent
 
 pod:
