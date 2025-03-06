@@ -1,3 +1,4 @@
+import os
 import httpx
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
@@ -9,7 +10,7 @@ SERVICE_B_HOST = "0.0.0.0"
 SERVICE_B_PORT = 8012
 
 # Core URL where Service A is available
-SERVICE_A_URL = "http://0.0.0.0:8011"
+SERVICE_A_URL = os.getenv("SERVICE_A_URL", "http://0.0.0.0:8011")
 
 app = FastAPI(
     title="Service B FastAPI Client",
