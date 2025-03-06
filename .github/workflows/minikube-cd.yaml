@@ -1,0 +1,31 @@
+name: Lint Helm
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+env:
+  APP_NAME: service-a
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - uses: azure/setup-helm@v4.3.0
+        with:
+          version: 'v3.5.0' 
+        id: install_helm
+
+      - name: Build and Load Docker Image
+        run: |
+           cd applications/${{ env.APP_NAME }}/src
+          docker build -t ${{ env.APP_NAME }}:${{github.run_number}} .
+          docker images 
+          minikube image load ${{ env.APP_NAME }}:${{github.run_number}}
+       
