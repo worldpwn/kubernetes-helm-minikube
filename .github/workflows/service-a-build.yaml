@@ -24,9 +24,10 @@ jobs:
 
       - name: Test Web Server
         run: |
+
           docker run -d -p 8011:8011 service-a:${{github.run_number}}
           sleep 5
-          curl -s http://localhost:8011/ping | grep "Greetings from Service A!"
+          curl -s http://localhost:8011/pingA | grep "WRONG"
           docker ps
           docker stop $(docker ps -q)
           docker ps
