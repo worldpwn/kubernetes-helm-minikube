@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: worldpwn/service-a
-  tag: "6"
+  tag: "13"
   pullPolicy: IfNotPresent
 
 service:
