@@ -15,7 +15,7 @@ jobs:
       matrix:
         helm_chart_folder: [
           applications/service-a/helm, 
-          # applications/service-b/helm
+          applications/service-b/helm
         ]
     steps:
       - name: Checkout repository
