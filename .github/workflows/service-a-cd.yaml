@@ -1,4 +1,4 @@
-name: Publish Service A Docker Image
+name: Deploy Service A
 
 on:
   workflow_dispatch:
@@ -8,9 +8,10 @@ on:
 
 env:
   APP_NAME: service-a
+  NAMESPACE: webapp
 
 jobs:
-  publish:
+  cd:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,4 +33,19 @@ jobs:
       - name: Publish Docker Image to Docker Hub
         run: |
           docker push worldpwn/${{ env.APP_NAME }}:${{github.run_number}}
-          
+
+      - name: Start minikube
+        uses: medyagh/setup-minikube@latest
+
+      - uses: azure/setup-helm@v4.3.0
+        with:
+          version: 'v3.17.0' 
+        id: install
+
+      - name: Install Helm Chart Deployment
+        run: |
+          helm install ${{ env.APP_NAME }} ./helm --create-namespace --namespace ${{ env.NAMESPACE }} --set image.tag=${{github.run_number}}
+
+      - name: Check Deployment Status
+        run: |
+          kubectl rollout status deployment/${{ env.APP_NAME }} -n ${{ env.NAMESPACE }}
