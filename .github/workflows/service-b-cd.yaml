@@ -47,4 +47,4 @@ jobs:
           helm install ${{ env.APP_NAME }} applications/${{ env.APP_NAME }}/helm --create-namespace --namespace ${{ env.NAMESPACE }} --set image.tag=${{github.run_number}}
       - name: Check Deployment Status
         run: |
-          kubectl rollout status deployment/${{ env.APP_NAME }} -n ${{ env.NAMESPACE }}
+          kubectl rollout status deployment/${{ env.APP_NAME }} -n ${{ env.NAMESPACE }} --timeout 5m
