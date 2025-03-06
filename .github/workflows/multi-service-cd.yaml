@@ -5,13 +5,16 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 env:
   NAMESPACE: webapp
   APP_NAME_A: service-a
   SERVICE_A_VERSION: 13
   APP_NAME_B: service-b
-  SERVICE_B_VERSION: 2
+  SERVICE_B_VERSION: 5
 
 jobs:
   deploy:
@@ -33,16 +36,17 @@ jobs:
           --set image.tag=${{ env.SERVICE_A_VERSION }}
       - name: Check Deployment Status Service A
         run: |
-          kubectl rollout status deployment/${{ env.APP_NAME_A }} -n ${{ env.NAMESPACE }}
+          kubectl rollout status deployment/${{ env.APP_NAME_A }} -n ${{ env.NAMESPACE }} --timeout 5m
       - name: Install Helm Chart Deployment Service B
         run: >
           helm install ${{ env.APP_NAME_B }} applications/service-b/helm 
           --create-namespace 
           --namespace ${{ env.NAMESPACE }} 
           --set image.tag=${{ env.SERVICE_B_VERSION }}
+          --set pod.healthCheckPath='/ping_service_a'
       - name: Check Deployment Status Service B
         run: |
-          kubectl rollout status deployment/${{ env.APP_NAME_B }} -n ${{ env.NAMESPACE }}
+          kubectl rollout status deployment/${{ env.APP_NAME_B }} -n ${{ env.NAMESPACE }} --timeout 5m
       - name: Get Pods
         run: |
           kubectl get pods -n ${{ env.NAMESPACE }}

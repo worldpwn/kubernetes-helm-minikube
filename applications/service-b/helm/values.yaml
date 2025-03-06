@@ -6,5 +6,11 @@ image:
   tag: "1"
   pullPolicy: IfNotPresent
 
+pod:
+  healthCheckPath: /ping
+
 service:
   port: 8012
+
+config:
+  SERVICE_A_URL: "http://service-a:8011"

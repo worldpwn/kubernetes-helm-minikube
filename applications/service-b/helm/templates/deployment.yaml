@@ -20,15 +20,18 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.appName }}-config
           readinessProbe:
             httpGet:
-              path: /ping
+              path: {{ .Values.pod.healthCheckPath }}
               port: {{ .Values.service.port }}
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /ping
+              path: {{ .Values.pod.healthCheckPath }}
               port: {{ .Values.service.port }}
             initialDelaySeconds: 15
             periodSeconds: 20

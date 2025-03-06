@@ -16,9 +16,15 @@ spec:
     spec:
       containers:
         - name: service-b
-          image: worldpwn/service-b:1
+          image: worldpwn/service-b:5
           ports:
             - containerPort: 8012
+          env:
+            - name: SERVICE_A_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: service-b-config
+                  key: SERVICE_A_URL
           readinessProbe:
             httpGet:
               path: /ping
