@@ -1,0 +1,45 @@
+name: Deploy Service A
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  NAMESPACE: webapp
+  SERVICE_A_VERSION: 13
+  SERVICE_B_VERSION: 2
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Start minikube
+        uses: medyagh/setup-minikube@latest
+      - uses: azure/setup-helm@v4.3.0
+        with:
+          version: 'v3.17.0' 
+        id: install
+      - name: Install Helm Chart Deployment Service A
+        run: >
+          helm install ${{ env.APP_NAME }} applications/service-a/helm 
+          --create-namespace 
+          --namespace ${{ env.NAMESPACE }} 
+          --set image.tag=${{ env.SERVICE_A_VERSION }}
+      - name: Check Deployment Status
+        run: |
+          kubectl rollout status deployment/${{ env.APP_NAME }} -n ${{ env.NAMESPACE }}
+            - name: Install Helm Chart Deployment Service B
+        run: >
+          helm install ${{ env.APP_NAME }} applications/service-b/helm 
+          --create-namespace 
+          --namespace ${{ env.NAMESPACE }} 
+          --set image.tag=${{ env.SERVICE_B_VERSION }}
+      - name: Check Deployment Status
+        run: |
+          kubectl rollout status deployment/${{ env.APP_NAME }} -n ${{ env.NAMESPACE }}
+```
