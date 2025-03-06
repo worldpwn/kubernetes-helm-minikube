@@ -1,0 +1,10 @@
+appName: service-b
+replicaCount: 1
+
+image:
+  repository: worldpwn/service-b
+  tag: "1"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8012
