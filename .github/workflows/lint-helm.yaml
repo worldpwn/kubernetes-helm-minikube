@@ -8,12 +8,6 @@ on:
     branches:
       - main
 
-- matrix:
-    helm_chart_folder: [
-      applications/service-a/helm, 
-      applications/service-a/helm
-    ]
-
 jobs:
   lint:
     runs-on: ubuntu-latest
