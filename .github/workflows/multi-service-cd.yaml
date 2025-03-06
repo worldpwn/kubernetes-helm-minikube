@@ -11,7 +11,7 @@ env:
   APP_NAME_A: service-a
   SERVICE_A_VERSION: 13
   APP_NAME_B: service-b
-  SERVICE_B_VERSION: 2
+  SERVICE_B_VERSION: 5
 
 jobs:
   deploy:
