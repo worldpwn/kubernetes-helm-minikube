@@ -1,4 +1,4 @@
-name: PR - Build Service B Docker Image
+name: Build Service B Docker Image
 
 on:
   push:
