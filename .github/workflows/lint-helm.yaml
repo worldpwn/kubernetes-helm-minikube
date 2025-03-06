@@ -15,12 +15,12 @@ jobs:
       matrix:
         helm_chart_folder: [
           applications/service-a/helm, 
-          applications/service-a/helm
+          applications/service-b/helm
         ]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+
       - uses: azure/setup-helm@v4.3.0
         with:
           version: 'v3.17.0' 
