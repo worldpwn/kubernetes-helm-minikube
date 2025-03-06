@@ -16,6 +16,18 @@ spec:
     spec:
       containers:
         - name: service-a
-          image: docker.io/library/service-a:latest
+          image: worldpwn/service-a:6
           ports:
             - containerPort: 8011
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 8011
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8011
+            initialDelaySeconds: 15
+            periodSeconds: 20
