@@ -11,8 +11,8 @@ env:
   NAMESPACE: webapp
 
 jobs:
-  cd:
-    runs-on: ubuntu-latest
+  publish:
+     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -33,6 +33,12 @@ jobs:
       - name: Publish Docker Image to Docker Hub
         run: |
           docker push worldpwn/${{ env.APP_NAME }}:${{github.run_number}}
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Start minikube
         uses: medyagh/setup-minikube@latest
