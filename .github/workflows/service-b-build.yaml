@@ -1,4 +1,4 @@
-name: Build Service A Docker Image
+name: Build Service B Docker Image
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  APP_NAME: service-a
+  APP_NAME: service-b
 
 jobs:
   build:
