@@ -1,4 +1,4 @@
-name: Deploy Service A
+name: Multi Service Deployment
 
 on:
   workflow_dispatch:
