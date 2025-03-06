@@ -18,7 +18,50 @@
 
 [![Lint Helm](https://github.com/worldpwn/kubernetes-helm-minikube/actions/workflows/lint-helm.yaml/badge.svg)](https://github.com/worldpwn/kubernetes-helm-minikube/actions/workflows/lint-helm.yaml)
 
-## How to Build, Deploy, and Verify
+
+# Summary
+
+## Key Highlights of My Implementation
+
+### Continuous Delivery & Shift-Left Approach
+- Followed Continuous Delivery (CD) principles, ensuring automated and seamless deployments.
+- Applied a Shift-Left approach by integrating early testing, security scanning, and quality checks into the pipeline.
+
+### Code Quality & Testability Enhancements
+- Refactored and improved code structure to enhance maintainability and enable effective testing.
+- Applied Test-Driven Development (TDD) by writing tests to: Validate the health of each microservice and Ensure correct communication between Service A & Service B.
+
+### Security & DevSecOps Practices
+- Added static code analysis to enforce quality and security standards.
+- Used GitHub Secrets to manage sensitive information securely, including Docker authentication.
+- Protected the main branch by requiring checks before merging, ensuring only validated changes are deployed.
+
+### CI/CD Pipeline & Automation
+- Built an end-to-end CI/CD pipeline (GitHub Actions)
+- Automate build, test, security scanning, and deployment.
+- Ensure only validated code is merged and deployed.
+
+## What I Didn’t Include (But Would in a Real-World Scenario)
+
+### Security Hardening for Kubernetes
+- Run pods as non-root users with minimal privileges.
+- Implement network policies to follow Zero Trust principles.
+- Use an external secret manager to store secrets and keys (Azure Key-Vault, AWS Secrets Manager etc)
+- For Authentication and Authorisation will use RoleBase Access or IAM or any other Identity Provider to offload and federate this process. 
+- Advanced Image Security & Supply Chain Integrity
+- Perform image scanning to detect vulnerabilities before deployment.
+- Use image signing to verify container integrity.
+
+### Optimized CI/CD Workflow
+- Improve monorepo setup to prevent unnecessary checks from running.
+
+### High Availability & Resilience
+- Implement multi-environment deployments (staging, pre-prod, production) for validation before release.
+- Add rollback mechanisms & canary deployments for safe production releases.
+
+
+
+# How to Build, Deploy, and Verify
 
 ### Build Your Deployment Artifacts
 
@@ -71,3 +114,4 @@
     ```
 
 This will verify that
+
