@@ -16,6 +16,13 @@ app = FastAPI(
     version="0.1.0",
 )
 
+@app.get("/ping")
+def ping():
+    return JSONResponse(
+        {
+            "message": "Greetings from Service B!"
+        }
+    )
 
 @app.get("/ping_service_a")
 def ping_service_a() -> JSONResponse:
